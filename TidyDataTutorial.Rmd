@@ -6,6 +6,7 @@ library(tidyverse)
 fship <- read_csv("data/The_Fellowship_Of_The_Ring.csv")
 # or this: fship <- read_csv(file.path("data", "The_Fellowship_Of_The_Ring.csv"))
 # DO NOT use read.csv, as it does not create a tibble (a type of data frame)
+
 ttow <- read_csv("data/The_Two_Towers.csv")
 rKing <- read_csv("data/The_Return_Of_The_King.csv")
 ```
@@ -24,10 +25,16 @@ We need to create a new variable, Gender, to track whether each count refers to 
 Then we can gather the word counts into a single variable.
 ```{r}
 # use gather() from the tidyr package
-lotr_untidy <- gather(lotr_untidy, key = 'Gender', value = 'Words', Female, Male)
+lotr_tidy <- gather(lotr_untidy, key = 'Gender', value = 'Words', Female, Male)
 ```
 
+4. Write the tidy data to a delimited file.
+Now we write this tiny dataset for use in downstream scripts for further analysis and visualization.
+```{r}
+write_csv(lotr_tidy, "data/lotr_tidy.csv")
+```
 
-
+EXERCISE
+# Write an R script that reads them in and writes a single tidy data frame to file
 
 
