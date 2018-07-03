@@ -1,0 +1,33 @@
+1. Import untidy Lord of the Rings data
+```{r}
+# essential to load tidyverse package!
+library(tidyverse)
+# read in data files: can do this
+fship <- read_csv("data/The_Fellowship_Of_The_Ring.csv")
+# or this: fship <- read_csv(file.path("data", "The_Fellowship_Of_The_Ring.csv"))
+# DO NOT use read.csv, as it does not create a tibble (a type of data frame)
+ttow <- read_csv("data/The_Two_Towers.csv")
+rKing <- read_csv("data/The_Return_Of_The_King.csv")
+```
+
+2. Collect untidy Lord of Rings data into a single data frame
+We want to glue the data together into a single data frame, stacking them up row wise (row binding).
+```{r}
+lotr_untidy <- bind_rows(fship, ttow, rKing) # use bind_rows()
+lotr_untidy # a tibble
+```
+Assembling one large data object from many little ones is a common data preparation task.
+A good guiding principle is to glue the pieces together as early as possible.
+
+3. Tidy the untidy Lord of Rings data
+We need to create a new variable, Gender, to track whether each count refers to males or females.
+Then we can gather the word counts into a single variable.
+```{r}
+# use gather() from the tidyr package
+lotr_untidy <- gather(lotr_untidy, key = 'Gender', value = 'Words', Female, Male)
+```
+
+
+
+
+
